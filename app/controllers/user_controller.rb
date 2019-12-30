@@ -31,4 +31,8 @@ class UserController < ApplicationController
     clear_session
     head status: :ok
   end
+
+  def login_page
+  end
+
 end

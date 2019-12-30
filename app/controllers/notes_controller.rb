@@ -16,7 +16,8 @@ class NotesController < ApplicationController
   #todo validate limit params
   def list
     page_size = params[:page_size].blank? ? @@DEFAULT_LIST_PAGE_SIZE : params[:page_size].to_i
-    page_num = params[:page_num].to_i - 1
+    page_num = params[:page_num].blank? ? 0 : params[:page_num].to_i - 1
+    #search_term = params[:search_term]
     note_list = Note.where(user_id: current_user_id)
                     .includes(:labels)
                     .limit(page_size).offset(page_num * page_size)

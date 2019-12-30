@@ -24,5 +24,6 @@ NotesApp::Application.routes.draw do
   post '/signin', to: "user#sign_in"
   post '/signup', to: "user#sign_up"
   post '/signout', to: "user#sign_out"
+  get '/login_page', to: "user#login_page"
 
 end
