@@ -1,0 +1,25 @@
+{
+  "name": "ember-data",
+  "version": "3.0.2",
+  "license": "MIT",
+  "main": "ember-data.js",
+  "dependencies": {
+    "ember": "^2.0.0"
+  },
+  "ignore": [
+    "**/*_configuration.js",
+    "ember-data-setup.js",
+    "docs",
+    "**/*.html"
+  ],
+  "homepage": "https://github.com/components/ember-data",
+  "_release": "3.0.2",
+  "_resolution": {
+    "type": "version",
+    "tag": "v3.0.2",
+    "commit": "ced1999b8c460cb677addf9655cc72cc7ab476c3"
+  },
+  "_source": "https://github.com/components/ember-data.git",
+  "_target": ">= 1.13.3",
+  "_originalSource": "ember-data"
+}

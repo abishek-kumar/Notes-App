@@ -1,0 +1,8 @@
+{{#each model.notes as |n|}}
+  {{note-card note=n onEditLabel=(action "showEditLabelList") showLabels=model.showLabels}}
+{{else}}
+  No notes present here...
+{{/each}}
+{{#if showEditLabels}}
+  {{edit-labels labels=selectedLabels  onClose=(action "hideEditLabelList") onSave=(action "updateNoteLabels") }}
+{{/if}}

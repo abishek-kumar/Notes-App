@@ -1,0 +1,18 @@
+{
+  "name": "active-model-adapter",
+  "version": "2.1.1",
+  "dependencies": {
+    "ember-data": ">= 1.13.3"
+  },
+  "homepage": "https://github.com/ember-data/active-model-adapter-dist",
+  "_release": "2.1.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "2.1.1",
+    "commit": "ae8e1ce3684743c21f47d9bd5f334307eb88fa89"
+  },
+  "_source": "https://github.com/ember-data/active-model-adapter-dist.git",
+  "_target": "^2.1.1",
+  "_originalSource": "active-model-adapter",
+  "_direct": true
+}

@@ -1,0 +1,29 @@
+<div>
+  <div>
+      {{input value = note.title placeholder="Title..."}}
+  </div>
+  <div>
+      {{textarea value = note.content}}
+  </div>
+  <div>
+    {{#if showLabels}}
+      {{#each note.labels as |l|}}
+        <span> {{l.name}}</span>
+      {{/each}}
+    {{/if}}
+  </div>
+  {{#if note.id}}
+    <div>
+      <button onclick={{action "deleteNote" note}}>Delete</button>
+      <button onclick={{action "persistNote" note}}>Save</button>
+      {{#if showLabels}}
+        <button onclick={{action "editLabels" note}}>Edit Labels</button>
+      {{/if}}
+    </div>
+  {{else}}
+    <div>
+      <button onclick={{action "deleteNote" note}}>Cancel</button>
+      <button onclick={{action "persistNote" note}}>Create</button>
+    </div>
+  {{/if}}
+</div>

@@ -1,0 +1,7 @@
+<div class="sidenav">
+  {{#link-to "list-notes" (query-params label="")}}Notes{{/link-to}}
+  {{#each labelList as |label|}}
+    {{#link-to "list-notes" (query-params label=label.id )}}{{label.name}}{{/link-to}}
+  {{/each}}
+  {{#link-to "manage-labels"}}Edit Labels{{/link-to}}
+</div>

@@ -1,0 +1,12 @@
+{{#each model as |label|}}
+  {{input type=text value=label.name}}
+  <div>
+    <button onclick={{action "saveLabel" label}}>Save</button>
+    <button onclick={{action "deleteLabel" label}}>Delete</button>
+  </div>
+{{/each}}
+<div>
+  <button onclick={{action "newLabel"}} >
+    New Label
+  </button>
+</div>
