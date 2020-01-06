@@ -1,29 +1,31 @@
 NotesApp::Application.routes.draw do
 
+  match '*all', controller: 'application', action: 'cors_preflight', via: [:options]
   resources :notes, only:[] do
     member do
-      post 'create', action: :create
-      put 'save', action: :save
-      delete 'delete', action: :delete
+      put '', action: :update
+      delete '', action: :delete
       put 'addLabel', action: :add_label
       put 'removeLabel', action: :remove_label
     end
     collection do
-      get 'list', action: :list
+      post '', action: :create
+      get '', action: :list
     end
   end
 
-  resources :label, only:[] do
+  resources :labels, only:[] do
     member do
-      post 'create', action: :create
-      put 'edit', action: :edit
-      delete 'delete', action: :delete
+      put '', action: :edit
+      delete '', action: :delete
+    end
+    collection do
+      post '', action: :create
+      get '', action: :list
     end
   end
 
   post '/signin', to: "user#sign_in"
   post '/signup', to: "user#sign_up"
   post '/signout', to: "user#sign_out"
-  get '/login_page', to: "user#login_page"
-
 end

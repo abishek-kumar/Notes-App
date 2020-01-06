@@ -6,39 +6,47 @@ class NotesController < ApplicationController
     unless has_required_write_params?
       return render status: 422, json: {"error"=>"Parameters missing"}
     end
-    note = Note.new(title: params[:title], content: params[:content], user_id: current_user_id)
+    note = Note.new(title: note_params[:title], content: note_params[:content], user_id: current_user_id)
 
-    return head :created if note.save
+    return render json: note if note.save
 
     render status: 422, json: note.errors.to_hash
   end
 
   #todo validate limit params
   def list
-    page_size = params[:page_size].blank? ? @@DEFAULT_LIST_PAGE_SIZE : params[:page_size].to_i
-    page_num = params[:page_num].blank? ? 0 : params[:page_num].to_i - 1
+    #page_size = params[:page_size].blank? ? @@DEFAULT_LIST_PAGE_SIZE : params[:page_size].to_i
+    #page_num = params[:page_num].blank? ? 0 : params[:page_num].to_i - 1
     #search_term = params[:search_term]
-    note_list = Note.where(user_id: current_user_id)
-                    .includes(:labels)
-                    .limit(page_size).offset(page_num * page_size)
-    render json: format_list_response(note_list)
+    note_list = nil
+    if(params[:label].blank?)
+      note_list = Note.where(user_id: current_user_id).includes(:labels)
+    else
+      note_list = Note.where(user_id: current_user_id, "labels.id": params[:label])
+                      .includes(:labels)
+    end
+
+    #.limit(page_size).offset(page_num * page_size)
+    render json: note_list
   end
 
-  def save
+  def update
     unless has_required_write_params?
       return render status: 422, json: {"error"=>"Parameters missing"}
     end
 
     begin
-      note = Note.where([id:params[:id], user_id: current_user_id]).first
+      note = Note.where(id:params[:id], user_id: current_user_id).first
     rescue ActiveRecord::RecordNotFound
       return render status: 422, json:{"error"=>"Invalid note id"}
     end
 
-    note.title = params[:title]
-    note.content = params[:content]
+    labels = Label.where(id:note_params[:labels])
+    note.title = note_params[:title]
+    note.content = note_params[:content]
+    note.labels = labels
 
-    return head :ok if note.save
+    return render json: @@EMPTY_JSON_RESPONSE if note.save
 
     render status: 422, json: note.errors.to_hash
   end
@@ -46,7 +54,7 @@ class NotesController < ApplicationController
   def delete
     begin
       Note.where(id:params[:id], user_id: current_user_id).first!.destroy
-      head :ok
+      render status: :ok, json: @@EMPTY_JSON_RESPONSE
     rescue ActiveRecord::RecordNotFound
       return render status: 422, json:{"error"=>"Invalid note id"}
     end
@@ -74,19 +82,11 @@ class NotesController < ApplicationController
 
   private
   def has_required_write_params?
-    params.key?(:title) && params.key?(:content)
+    note_params.key?(:title) && note_params.key?(:content)
   end
 
-  def format_list_response(note_list)
-    note_list.map do |note|
-      hash = {}
-      hash.store(:note_id, note.id)
-      hash.store(:title, note.title)
-      hash.store(:content, note.content)
-      label_arr = note.labels.map { |label| {:id=>label.id, :name=>label.name } }
-      hash.store(:labels,label_arr)
-      hash
-      end
+  def note_params
+    params[:note]
   end
 
 end

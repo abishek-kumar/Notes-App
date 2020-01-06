@@ -15,13 +15,14 @@ class UserController < ApplicationController
       return head status: :unauthorized
     end
 
-    head status: :ok
+    #head status: :ok
+    redirect_to "http://localhost:4200/notes-list"
   end
 
   def sign_up
     new_user = User.new(name: params[:name], password: params[:password] )
     if new_user.save
-      head status: :created
+      redirect_to "http://localhost:4200/notes-list"
     else
       head status: 400
     end
@@ -31,8 +32,4 @@ class UserController < ApplicationController
     clear_session
     head status: :ok
   end
-
-  def login_page
-  end
-
 end

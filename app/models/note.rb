@@ -6,5 +6,5 @@ class Note < ActiveRecord::Base
   validates :user_id, presence: true
 
   has_and_belongs_to_many :labels
-  #attr_accessible :labels_notes
+  attr_accessible :labels_notes
 end
