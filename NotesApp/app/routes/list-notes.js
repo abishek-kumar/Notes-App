@@ -4,15 +4,19 @@ import RSVP from 'rsvp';
 export default Ember.Route.extend({
   model(params){
     let isLabelParamsPresent = (params.label !== undefined && params.label !== "");
-    let notesPromise = (isLabelParamsPresent) ? this.get("store").query("note",params) : this.get("store").findAll("note");
+    let searchTermVal = (params.searchTerm !== undefined && params.searchTerm !== "") ? params.searchTerm : "";
     return RSVP.hash({
-      notes : notesPromise,
+      notes : this.get("store").query("note",params),
       labels : this.get("store").findAll("label"),
-      showLabels : !isLabelParamsPresent
+      showLabels : !isLabelParamsPresent,
+      searchTerm : searchTermVal
     });
   },
   queryParams : {
     label : {
+      refreshModel: true
+    },
+    searchTerm : {
       refreshModel: true
     }
   }

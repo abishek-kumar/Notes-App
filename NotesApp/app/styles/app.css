@@ -61,3 +61,10 @@ body {
   .sidenav {padding-top: 15px;}
   .sidenav a {font-size: 18px;}
 }
+.search-bar input{
+  width: 75%;
+  font-size: 20px;
+}
+.search-bar{
+  padding: 20px;
+}

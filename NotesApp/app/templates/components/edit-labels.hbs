@@ -1,5 +1,6 @@
 <div class="modal">
   <div class="modal-content">
+    <div>Labels</div>
       {{#each labels as |l|}}
         <div>{{input type="checkbox" name=l.label.name checked = l.isSelected }} {{l.label.name}}</div>
       {{/each}}

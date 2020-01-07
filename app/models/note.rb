@@ -1,6 +1,6 @@
 #todo - stop persistence of user_id on update of the record
 class Note < ActiveRecord::Base
-  attr_accessible :content, :id, :title, :user_id
+  attr_accessible :content, :id, :title, :user_id, :is_deleted
 
   validates :title, presence:true, length: 2..31
   validates :user_id, presence: true

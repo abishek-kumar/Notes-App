@@ -6,15 +6,13 @@
       {{textarea value = note.content}}
   </div>
   <div>
-    {{#if showLabels}}
-      {{#each note.labels as |l|}}
-        <span> {{l.name}}</span>
-      {{/each}}
-    {{/if}}
+    {{#each note.labels as |l|}}
+      <span> {{l.name}}</span>
+    {{/each}}
   </div>
   {{#if note.id}}
     <div>
-      <button onclick={{action "deleteNote" note}}>Delete</button>
+      <button onclick={{action "deleteNote" note}}>Trash</button>
       <button onclick={{action "persistNote" note}}>Save</button>
       {{#if showLabels}}
         <button onclick={{action "editLabels" note}}>Edit Labels</button>
