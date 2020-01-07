@@ -1,1 +1,8 @@
-<button onclick = {{action "createNote"}}>New</button>
+<button onclick = {{action "showNewNote"}}>New</button>
+{{#if showPopup}}
+  <div class="modal">
+    <div class="modal-content">
+      {{note-card note=newNote onDelete=(action "hideNewNote") onPersist=(action "hideNewNote")}}
+    </div>
+  </div>
+{{/if}}

@@ -33,6 +33,7 @@ GEM
       multi_json (~> 1.0)
     arel (3.0.3)
     builder (3.0.4)
+    chronic (0.10.2)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
       railties (~> 3.2.0)
@@ -109,6 +110,8 @@ GEM
     tzinfo (0.3.56)
     uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -121,6 +124,7 @@ DEPENDENCIES
   rails (= 3.2.22.5)
   sass-rails (~> 3.2.3)
   uglifier (>= 1.0.3)
+  whenever
 
 BUNDLED WITH
    1.17.3
